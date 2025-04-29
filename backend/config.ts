@@ -1,1 +1,0 @@
-export const JWT_SECERET ="NEW_PAYTM"
