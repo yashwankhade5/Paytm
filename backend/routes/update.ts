@@ -49,11 +49,12 @@ router.get('/bulk',authMiddleware,async (req,res)=>{
     if (finduser) {
             
         res.status(200).json({
-            users: [{
-                firstName: finduser[0].lastName,
-                lastName: finduser[0].firstName,
-                _id: finduser[0]._id
-            }]
+            users: finduser.map(user=>({
+                "username": user.username,
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "_id": user._id
+            }))
         } )
         
     }

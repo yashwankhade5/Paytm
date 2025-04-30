@@ -1,5 +1,5 @@
 import  express from "express";
-import { User } from "../db";
+import { User ,Account} from "../db";
 import jwt from "jsonwebtoken";
 const router = express.Router()
 import { z } from "zod";
@@ -36,13 +36,18 @@ router.post('/signup',async (req,res)=>{
             password:info.data.password,
             username:info.data.username
         })
-       
         const userid=usercreated._id
-        const token =jwt.sign({userid},JWT_SECERET)
+        await Account.create({
+userid,
+amount: 1* Math.random()*10000
+        })
+       
+       
+        
         
         res.json({
                 message: "User created successfully",
-                token: token
+               
          }) 
             return
         }catch(e){
